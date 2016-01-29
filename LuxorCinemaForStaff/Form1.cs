@@ -22,7 +22,7 @@ namespace LuxorCinemaForStaff
         public static HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
         public static СombineSessionsTime Combine = new СombineSessionsTime();
 
-        private void GetFilmInfo_1()
+        private void GetFilmInfo()
         {
             EncodeHtml myEncode = new EncodeHtml();
             //GetHtmlEncode(webhtml); //передаем ссылку ростовского люксора для конверна => убиваем кракозябры
@@ -69,7 +69,7 @@ namespace LuxorCinemaForStaff
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            GetFilmInfo_1();
+            GetFilmInfo();
         }
     }
 }
