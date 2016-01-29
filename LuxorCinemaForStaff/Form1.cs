@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HtmlAgilityPack;
@@ -17,10 +18,74 @@ namespace LuxorCinemaForStaff
         public Form1()
         {
             InitializeComponent();
+
+            butStart.Click += btnStart_Click;
+            butStop.Click += btnStop_Click;
+
+            worker.DoWork += worker_DoWork;
+            worker.ProgressChanged += worker_ProgressChanged;
+            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
         }
 
         public static HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
         public static СombineSessionsTime Combine = new СombineSessionsTime();
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            worker.CancelAsync();
+            
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            butStart.Enabled = false;
+            if (worker.IsBusy == false)
+            {
+                worker.RunWorkerAsync();
+            }
+        }
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (int i = 0; i <=99; i++)
+            {
+
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+
+                worker.ReportProgress(i);
+                Thread.Sleep(10);
+
+            }
+
+        }
+
+        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(string.Format("Ошибка : {0}", e.Error.Message));
+            }
+            else
+            {
+                string message = e.Cancelled ? "Процесс отменен" : "Процесс завершен";
+                MessageBox.Show(message);
+                progressBar1.Value = 0;
+                
+            }
+            butStart.Enabled = true;
+        }
+
+        private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage + 1;
+            progressBar1.Value = e.ProgressPercentage;
+            
+            //dataGridView1.Rows.Add(Convert.ToString(e.ProgressPercentage));
+            //MessageBox.Show(Convert.ToString(e.ProgressPercentage));
+
+        }
 
         private void GetFilmInfo()
         {
@@ -52,7 +117,12 @@ namespace LuxorCinemaForStaff
                                 //тег <a> видоизменяется в зависимости от времени (сеанс закончен или нет), 
                                 //поэтому решил идти снизу вверх (зал внизу, время наверху), т.к. зал - обязательный потомок для тегов shedule-data.  
 
-                                dataGridView1.Rows.Add(nameFilm, hall.InnerText.Trim(), sesionStartTime, Combine.SessionEndTime(sesionStartTime, timefilm), timefilm);
+                                dataGridView1.Rows.Add
+                                    (nameFilm, 
+                                    hall.InnerText.Trim(), 
+                                    sesionStartTime, 
+                                    Combine.SessionEndTime(sesionStartTime, timefilm), 
+                                    timefilm);
 
                             }
                         }
@@ -69,8 +139,12 @@ namespace LuxorCinemaForStaff
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            GetFilmInfo();
+            //GetFilmInfo();
         }
+
+    
+
+       
     }
 }
 
