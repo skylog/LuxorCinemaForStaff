@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 
-namespace SimpleTest
+namespace LuxorCinemaForStaff
 {
     
     public class EncodeHtml
