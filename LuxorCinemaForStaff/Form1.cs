@@ -28,7 +28,8 @@ namespace LuxorCinemaForStaff
         }
 
         public static HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-        public static СombineSessionsTime Combine = new СombineSessionsTime();
+        СombineSessionsTime Combine = new СombineSessionsTime();
+
         private void btnStop_Click(object sender, EventArgs e)
         {
             worker.CancelAsync();
@@ -87,9 +88,10 @@ namespace LuxorCinemaForStaff
 
         }
 
-        private void GetFilmInfo()
+        private async void GetFilmInfo()
         {
             EncodeHtml myEncode = new EncodeHtml();
+            await myEncode.EncodeHtmlAsync();
             //GetHtmlEncode(webhtml); //передаем ссылку ростовского люксора для конверна => убиваем кракозябры
             var trMainLine = doc.DocumentNode.SelectNodes("//tr[@class='one-film-line']"); //именно здесь лежит инфа типа: фильм + время сеанса - зал, время сеанса - зал..
             if (trMainLine != null)
@@ -101,8 +103,17 @@ namespace LuxorCinemaForStaff
                         var nameFilm = line.ChildNodes.FindFirst("h3").ChildNodes[1].InnerText.Trim(); //название фильма
                         var linkFilm = line.ChildNodes.FindFirst("h3").ChildNodes[1].Attributes["href"].Value; //ссылка на страницу с описанием фильма
                         EncodeHtml myLinkEncode = new EncodeHtml(linkFilm);
-                        //GetHtmlEncode(linkFilm); //передаем полученную ссылку для парсинга продолжительности фильма
-                        var timefilm = doc.DocumentNode.SelectSingleNode("//div[@class='cast-away']/table/tbody/tr[7]/td[2]").InnerText;
+                        string timefilm;
+                        try
+                        {
+                            timefilm = doc.DocumentNode.SelectSingleNode("//div[@class='cast-away']/table/tbody/tr[7]/td[2]").InnerText;
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.Print(ex.Message);
+                            timefilm = null;
+                        }
+
                         //еще костыль, пока хз как получать Продолжительность, т.к. инфа просто в в определенной таблице
                         var hallsLine = line.Descendants()
                             .Where(n => n.Attributes["class"] != null
@@ -118,10 +129,10 @@ namespace LuxorCinemaForStaff
                                 //поэтому решил идти снизу вверх (зал внизу, время наверху), т.к. зал - обязательный потомок для тегов shedule-data.  
 
                                 dataGridView1.Rows.Add
-                                    (nameFilm, 
-                                    hall.InnerText.Trim(), 
-                                    sesionStartTime, 
-                                    Combine.SessionEndTime(sesionStartTime, timefilm), 
+                                    (nameFilm,
+                                    hall.InnerText.Trim(),
+                                    sesionStartTime,
+                                    Combine.SessionEndTime(sesionStartTime, timefilm),
                                     timefilm);
 
                             }
@@ -139,7 +150,9 @@ namespace LuxorCinemaForStaff
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //GetFilmInfo();
+            GetFilmInfo();
+            //EncodeHtml myEncode = new EncodeHtml();
+            //myEncode.EncodeHtmlAsync();
         }
 
     
