@@ -93,15 +93,15 @@ namespace LuxorCinemaForStaff
             EncodeHtml myEncode = new EncodeHtml();
             await myEncode.EncodeHtmlAsync();
             //GetHtmlEncode(webhtml); //передаем ссылку ростовского люксора для конверна => убиваем кракозябры
-            var trMainLine = doc.DocumentNode.SelectNodes("//tr[@class='one-film-line']"); //именно здесь лежит инфа типа: фильм + время сеанса - зал, время сеанса - зал..
+            HtmlNodeCollection trMainLine = doc.DocumentNode.SelectNodes("//tr[@class='one-film-line']"); //именно здесь лежит инфа типа: фильм + время сеанса - зал, время сеанса - зал..
             if (trMainLine != null)
             {
-                foreach (var line in trMainLine)
+                foreach (HtmlNode line in trMainLine)
                 {
                     try
                     {
-                        var nameFilm = line.ChildNodes.FindFirst("h3").ChildNodes[1].InnerText.Trim(); //название фильма
-                        var linkFilm = line.ChildNodes.FindFirst("h3").ChildNodes[1].Attributes["href"].Value; //ссылка на страницу с описанием фильма
+                        string nameFilm = line.ChildNodes.FindFirst("h3").ChildNodes[1].InnerText.Trim(); //название фильма
+                        string linkFilm = line.ChildNodes.FindFirst("h3").ChildNodes[1].Attributes["href"].Value; //ссылка на страницу с описанием фильма
                         EncodeHtml myLinkEncode = new EncodeHtml(linkFilm);
                         string timefilm;
                         try
@@ -115,15 +115,15 @@ namespace LuxorCinemaForStaff
                         }
 
                         //еще костыль, пока хз как получать Продолжительность, т.к. инфа просто в в определенной таблице
-                        var hallsLine = line.Descendants()
+                        IEnumerable<HtmlNode> hallsLine = line.Descendants()
                             .Where(n => n.Attributes["class"] != null
                             && n.Attributes["class"].Value == "hall-td"); //получаем список залов <td class ='hall-td'>Зал N</td>  
 
                         if (hallsLine != null)
                         {
-                            foreach (var hall in hallsLine)
+                            foreach (HtmlNode hall in hallsLine)
                             {
-                                var sesionStartTime = hall.ParentNode.ParentNode.ParentNode.ParentNode.ParentNode.ParentNode.FirstChild.InnerText.Trim();
+                                string sesionStartTime = hall.ParentNode.ParentNode.ParentNode.ParentNode.ParentNode.ParentNode.FirstChild.InnerText.Trim();
                                 //так делать нельзя, но приходится т.к. время сеансов находится в <a class ='shedule-data  session_completed' || 'shedule-data  '
                                 //тег <a> видоизменяется в зависимости от времени (сеанс закончен или нет), 
                                 //поэтому решил идти снизу вверх (зал внизу, время наверху), т.к. зал - обязательный потомок для тегов shedule-data.  

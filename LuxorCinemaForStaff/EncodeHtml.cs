@@ -59,7 +59,7 @@ namespace LuxorCinemaForStaff
             try
             {
                 uri = new Uri(string.Concat(webMain, insertHtml)); //без этой шляпы не работают ссылки с немецкими символами о.О
-                var web = new HtmlWeb
+                HtmlWeb web = new HtmlWeb
                     {
                         AutoDetectEncoding = false,
                         OverrideEncoding = Encoding.UTF8,
