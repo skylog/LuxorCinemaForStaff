@@ -90,6 +90,7 @@ namespace LuxorCinemaForStaff
 
         private async void GetFilmInfo()
         {
+            
             EncodeHtml myEncode = new EncodeHtml();
             await myEncode.EncodeHtmlAsync();
             //GetHtmlEncode(webhtml); //передаем ссылку ростовского люксора для конверна => убиваем кракозябры
@@ -103,15 +104,35 @@ namespace LuxorCinemaForStaff
                         string nameFilm = line.ChildNodes.FindFirst("h3").ChildNodes[1].InnerText.Trim(); //название фильма
                         string linkFilm = line.ChildNodes.FindFirst("h3").ChildNodes[1].Attributes["href"].Value; //ссылка на страницу с описанием фильма
                         EncodeHtml myLinkEncode = new EncodeHtml(linkFilm);
-                        string timefilm;
+                        string timefilmStr;
+
                         try
                         {
-                            timefilm = doc.DocumentNode.SelectSingleNode("//div[@class='cast-away']/table/tbody/tr[7]/td[2]").InnerText;
+                            timefilmStr = doc.DocumentNode.SelectSingleNode("//div[@class='cast-away']/table/tbody/tr[7]/td[2]").InnerText;
+                            if (timefilmStr.Length > 12)
+                            {
+                                HtmlNodeCollection timeFilmTD = doc.DocumentNode.SelectNodes("//td");
+                                if (timeFilmTD != null)
+                                {
+                                    foreach (var td in timeFilmTD)
+                                    {
+                                        if (td.InnerText == "Продолжительность:")
+                                        {
+                                            timefilmStr = td.NextSibling.NextSibling.InnerText;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                
+                            }
                         }
                         catch (Exception ex)
                         {
                             Debug.Print(ex.Message);
-                            timefilm = null;
+                            timefilmStr = null;
                         }
 
                         //еще костыль, пока хз как получать Продолжительность, т.к. инфа просто в в определенной таблице
@@ -132,8 +153,8 @@ namespace LuxorCinemaForStaff
                                     (nameFilm,
                                     hall.InnerText.Trim(),
                                     sesionStartTime,
-                                    Combine.SessionEndTime(sesionStartTime, timefilm),
-                                    timefilm);
+                                    Combine.SessionEndTime(sesionStartTime, timefilmStr),
+                                    timefilmStr);
 
                             }
                         }
