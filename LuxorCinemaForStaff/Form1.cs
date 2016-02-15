@@ -111,10 +111,10 @@ namespace LuxorCinemaForStaff
                             timefilmStr = doc.DocumentNode.SelectSingleNode("//div[@class='cast-away']/table/tbody/tr[7]/td[2]").InnerText;
                             if (timefilmStr.Length > 12)
                             {
-                                HtmlNodeCollection timeFilmTD = doc.DocumentNode.SelectNodes("//td");
-                                if (timeFilmTD != null)
+                                HtmlNodeCollection elementsTd = doc.DocumentNode.SelectNodes("//td");
+                                if (elementsTd != null)
                                 {
-                                    foreach (var td in timeFilmTD)
+                                    foreach (var td in elementsTd)
                                     {
                                         if (td.InnerText == "Продолжительность:")
                                         {
@@ -172,6 +172,12 @@ namespace LuxorCinemaForStaff
         private void Form1_Load(object sender, EventArgs e)
         {
             GetFilmInfo();
+
+
+            FilmValue f = new FilmValue();
+            f.Name = "123";
+
+
             //EncodeHtml myEncode = new EncodeHtml();
             //myEncode.EncodeHtmlAsync();
         }

@@ -24,13 +24,15 @@ namespace LuxorCinemaForStaff
             string html;
             using (var http = new HttpClient())
             {
-                http.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0(Windows; U; Windows NT 5.1; en - US; rv: x.x.x) Gecko / 20041107 Firefox / x.x");
+                http.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0(Windows; U; Windows NT 5.1; en - US; rv: x.x.x) Gecko / 20041107 Firefox / x.x");   
+                #region Представимся браузером
                 /*
                 http.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml");
                 http.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate");
                 http.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
                 http.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Charset", "ISO-8859-1");
                 */
+                #endregion
                 html = await http.GetStringAsync(webRnd);
             }
             var htmlDoc = new HtmlDocument();
@@ -39,6 +41,7 @@ namespace LuxorCinemaForStaff
         
         }
 
+
         public EncodeHtml()
         {
             var web = new HtmlWeb
@@ -46,25 +49,45 @@ namespace LuxorCinemaForStaff
                 AutoDetectEncoding = false,
                 OverrideEncoding = Encoding.UTF8,
             };
-            Form1.doc = web.Load(webRnd);
+            Form1.doc = web.Load(GetUri());
         }
 
+        public string GetUri()
+        {
+            return GetUri(null);
+
+        }
+        public string GetUri(string webTail)
+        {
+            Uri u;
+            if (webTail != null)
+            {
+                //Uri u = new Uri(string.Concat(webMain, webTail)); //без этой шляпы не работают ссылки с немецкими символами о.О
+                u = new Uri(string.Concat(webMain, webTail)); //без этой шляпы не работают ссылки с немецкими символами о.О
+                return u.AbsoluteUri;
+            }
+            else
+            {
+                //Uri u = new Uri(webMain);
+                u = new Uri(webMain);
+                return u.AbsoluteUri;
+            }
+            
+        }
 
         /// <summary>
         /// EncodeHtml(string insertHtml) - для обработки множества страниц с фильмами
         /// </summary>
-        Uri uri;
-        public EncodeHtml(string insertHtml)
+        public EncodeHtml(string insertHtml) 
         {
             try
             {
-                uri = new Uri(string.Concat(webMain, insertHtml)); //без этой шляпы не работают ссылки с немецкими символами о.О
                 HtmlWeb web = new HtmlWeb
                     {
                         AutoDetectEncoding = false,
                         OverrideEncoding = Encoding.UTF8,
                     };
-                    Form1.doc = web.Load(uri.AbsoluteUri);
+                Form1.doc = web.Load(GetUri(insertHtml));
             }
             catch(Exception ex)
             {
