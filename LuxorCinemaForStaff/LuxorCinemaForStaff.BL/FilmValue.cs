@@ -8,7 +8,15 @@ namespace LuxorCinemaForStaff.BL
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set
+            {
+                if (value == null)
+                {
+                    _name = "";
+                    return;
+                }
+                _name = value;
+            }
         }
 
         private string _length;
@@ -22,7 +30,18 @@ namespace LuxorCinemaForStaff.BL
                 _length = lengthReplace;
             }
         }
+        
+        public FilmValue(string name, string length)
+        {
+            Name = name;
+            Length = length;
+        }
 
+        public FilmValue()
+        {
+            Name = "Название фильма";
+            Length = "0 ч. 00 мин.";
+        }
 
         public DateTime FilmLengthStrToDateTime(string length)
         {
