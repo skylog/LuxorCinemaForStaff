@@ -17,11 +17,11 @@ namespace ConsoleApplication
             Film1.Length = "2 ч. 30 мин.";
             Film1.Name = null;
 
-            FilmValue Film2 = new FilmValue();
+            FilmValue Film2 = new FilmValue("Хоббит", "3 ч. 10 мин.");
             
             Console.WriteLine(Film.Length);
             Console.WriteLine(Film1.Length + Film1.Name );
-            Console.WriteLine(Film2.Length + Film2.Name);
+            Console.WriteLine("{0}, длительность фильма: {1}",  Film2.Name, Film2.Length);
             Console.ReadLine();
 
         }
