@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace LuxorCinemaForStaff
+namespace LuxorCinemaForStaff.BL
 {
-    class FilmValue : IValue
+    public class FilmValue : IValue
     {
         private string _name;
         public string Name
@@ -15,10 +15,16 @@ namespace LuxorCinemaForStaff
         public string Length
         {
             get { return _length; }
-            set { _length = value; }
+            set
+            {
+                _length = value.ToString();
+                string lengthReplace = _length.Replace("ч.", ":").Replace("мин.", "").Replace(" ", "");
+                _length = lengthReplace;
+            }
         }
 
-        public DateTime StringLengthToDateTime(string length)
+
+        public DateTime FilmLengthStrToDateTime(string length)
         {
 
             string lengthReplace = length.Replace("ч.", ":").Replace("мин.", "").Replace(" ", "");

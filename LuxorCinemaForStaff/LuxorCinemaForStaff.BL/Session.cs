@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace LuxorCinemaForStaff
+namespace LuxorCinemaForStaff.BL
 {
-    class Session
+    public class Session
     {
         private DateTime _start;
         public DateTime Start
@@ -20,6 +20,8 @@ namespace LuxorCinemaForStaff
                 //_end = f.Length;
             }
         }
+
+        
 
 
     }

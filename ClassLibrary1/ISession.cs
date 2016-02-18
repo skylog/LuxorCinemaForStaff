@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LuxorCinemaForStaff
+namespace LuxorCinemaForStaff.BL
 {
-    interface ISession
+    public interface ISession
     {
-        string Name { get; }
+        //FilmValue f = new FilmValue();
+
     }
 }

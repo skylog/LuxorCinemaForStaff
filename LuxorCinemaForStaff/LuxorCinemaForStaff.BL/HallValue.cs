@@ -1,6 +1,6 @@
-﻿namespace LuxorCinemaForStaff
+﻿namespace LuxorCinemaForStaff.BL
 {
-    class HallValue : IValue
+    public class HallValue : IValue
     {
         private string _name;
 

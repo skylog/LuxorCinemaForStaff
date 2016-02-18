@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 
 namespace LuxorCinemaForStaff
 {
-    
+
     public class EncodeHtml
     {
         //static string localhtml = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "simple_test.html");

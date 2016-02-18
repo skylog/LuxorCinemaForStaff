@@ -1,4 +1,4 @@
-﻿namespace LuxorCinemaForStaff
+﻿namespace LuxorCinemaForStaff.BL
 {
     class HallValue : IValue
     {

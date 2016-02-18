@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LuxorCinemaForStaff
+namespace LuxorCinemaForStaff.BL
 {
     class Session
     {
@@ -17,7 +17,7 @@ namespace LuxorCinemaForStaff
             get { return _end; }
             set {
                 FilmValue f = new FilmValue();
-                //_end = f.Length;
+                _end = f.Length;
             }
         }
 
