@@ -8,7 +8,7 @@ namespace LuxorCinemaForStaff.BL
 {
     public interface ISession
     {
-        //FilmValue f = new FilmValue();
-
+        DateTime Start { get; }
+        
     }
 }

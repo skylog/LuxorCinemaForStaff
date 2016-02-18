@@ -2,7 +2,7 @@
 
 namespace LuxorCinemaForStaff.BL
 {
-    public class Session
+    public class Session : ISession
     {
         private DateTime _start;
         public DateTime Start
@@ -21,8 +21,6 @@ namespace LuxorCinemaForStaff.BL
             }
         }
 
-        
-
-
+       
     }
 }
