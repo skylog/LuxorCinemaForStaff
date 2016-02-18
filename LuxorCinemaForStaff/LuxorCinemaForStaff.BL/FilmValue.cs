@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace LuxorCinemaForStaff.BL
 {
     public class FilmValue : IValue
@@ -10,24 +9,17 @@ namespace LuxorCinemaForStaff.BL
             get { return _name; }
             set
             {
-                if (value == null)
-                {
-                    _name = "";
-                    return;
-                }
-                _name = value;
+                _name = value ?? string.Empty;
             }
         }
 
         private string _length;
         public string Length
         {
-            get { return _length; }
+            get { return _length.ToString(); }
             set
             {
-                _length = value.ToString();
-                string lengthReplace = _length.Replace("ч.", ":").Replace("мин.", "").Replace(" ", "");
-                _length = lengthReplace;
+                _length = value.Replace("ч.", ":").Replace("мин.", "").Replace(" ", "");
             }
         }
         

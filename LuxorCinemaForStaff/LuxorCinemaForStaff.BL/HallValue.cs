@@ -1,4 +1,5 @@
-﻿namespace LuxorCinemaForStaff.BL
+﻿
+namespace LuxorCinemaForStaff.BL
 {
     public class HallValue : IValue
     {
@@ -8,12 +9,7 @@
             get { return _name; }
             set
             {
-                if (value == null)
-                {
-                    _name = "";
-                    return;
-                }
-                _name = value;
+                _name = value ?? string.Empty;
             }
         }
 
@@ -22,6 +18,18 @@
         {
             get { return _start; }
             set { _start = value; }
+        }
+
+        public HallValue(string name, string start)
+        {
+            Name = name;
+            Start = start;
+        }
+
+        public HallValue()
+        {
+            Name = "Зал №";
+            Start = "00:00";
         }
     }
 }

@@ -4,22 +4,24 @@ namespace LuxorCinemaForStaff.BL
 {
     public class Session : ISession
     {
-        private DateTime _start;
-        public DateTime Start
+        private string _start;
+        public string Start
         {
             get { return _start; }
             set { _start = value; }
         }
 
-        private DateTime _end;
-        public DateTime End
+        private string _end;
+        public string End
         {
             get { return _end; }
             set {
-                FilmValue f = new FilmValue();
-                //_end = f.Length;
+                FilmValue filmLength = new FilmValue();
+                HallValue startTime  = new HallValue();
+                _end = filmLength.Length + startTime.Start;
             }
         }
+
 
        
     }
