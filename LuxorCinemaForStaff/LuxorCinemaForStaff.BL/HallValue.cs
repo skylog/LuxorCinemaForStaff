@@ -1,8 +1,28 @@
-﻿
+﻿using System;
 namespace LuxorCinemaForStaff.BL
 {
     public class HallValue : IValue
     {
+        delegate TimeSpan Trimer(string duration_string);
+        #region Конструкторы
+        public HallValue(string input)
+        {
+            Trimer t = Trim;
+            t(input);
+        }
+        public HallValue(string name, TimeSpan start)
+        {
+            Name = name;
+            //Start = start;
+        }
+
+        public HallValue()
+        {
+            Name = "Зал №";
+            //Start = "00:00";
+        }
+        #endregion
+        #region Поля
         private string _name;
         public string Name
         {
@@ -13,23 +33,18 @@ namespace LuxorCinemaForStaff.BL
             }
         }
 
-        private string _start;
-        public string Start
+        private TimeSpan _start;
+        public TimeSpan Start
         {
             get { return _start; }
             set { _start = value; }
         }
-
-        public HallValue(string name, string start)
+        #endregion
+        #region Методы
+        private TimeSpan Trim(string start_string)
         {
-            Name = name;
-            Start = start;
+            return Start = TimeSpan.Parse(start_string.Replace("ч.", ":").Replace("мин.", "").Replace(" ", ""));
         }
-
-        public HallValue()
-        {
-            Name = "Зал №";
-            Start = "00:00";
-        }
+        #endregion
     }
 }

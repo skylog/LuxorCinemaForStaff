@@ -3,6 +3,29 @@ namespace LuxorCinemaForStaff.BL
 {
     public class FilmValue : IValue
     {
+        delegate TimeSpan Trimer(string duration_string);
+        #region Конструкторы
+        public FilmValue(string input)
+        {
+            Trimer t = Trim;
+            t(input);
+        }
+        public FilmValue(string name, TimeSpan duration)
+        {
+            Name = name;
+            Duration = duration;
+        }
+
+        public FilmValue()
+        {
+            Trimer t = Trim;
+
+            Name = "Название фильма";
+            Duration = t("0 ч. 00 мин.");
+
+        }
+        #endregion
+        #region Поля
         private string _name;
         public string Name
         {
@@ -13,26 +36,17 @@ namespace LuxorCinemaForStaff.BL
             }
         }
 
-        private string _length;
-        public string Length
+        private TimeSpan _duration;
+        public TimeSpan Duration
         {
-            get { return _length.ToString(); }
-            set
-            {
-                _length = value.Replace("ч.", ":").Replace("мин.", "").Replace(" ", "");
-            }
+            get { return _duration; }
+            set { _duration = value; }
         }
-        
-        public FilmValue(string name, string length)
+        #endregion
+        #region Методы
+        private TimeSpan Trim(string duration_string)
         {
-            Name = name;
-            Length = length;
-        }
-
-        public FilmValue()
-        {
-            Name = "Название фильма";
-            Length = "0 ч. 00 мин.";
+            return Duration = TimeSpan.Parse(duration_string.Replace("ч.", ":").Replace("мин.", "").Replace(" ", ""));
         }
 
         public DateTime FilmLengthStrToDateTime(string length)
@@ -53,5 +67,6 @@ namespace LuxorCinemaForStaff.BL
 
             return result;
         }
+        #endregion
     }
 }
