@@ -25,6 +25,7 @@ namespace LuxorCinemaForStaff.BL
 
         }
         #endregion
+
         #region Поля
         private string _name;
         public string Name
@@ -47,25 +48,6 @@ namespace LuxorCinemaForStaff.BL
         private TimeSpan Trim(string duration_string)
         {
             return Duration = TimeSpan.Parse(duration_string.Replace("ч.", ":").Replace("мин.", "").Replace(" ", ""));
-        }
-
-        public DateTime FilmLengthStrToDateTime(string length)
-        {
-
-            string lengthReplace = length.Replace("ч.", ":").Replace("мин.", "").Replace(" ", "");
-            DateTime result = Convert.ToDateTime(lengthReplace);
-            /*if (lengthRep.Count() <= 5)
-            {
-                string pattern = @"([:])";
-                string[] elements = System.Text.RegularExpressions.Regex.Split(lengthRep, pattern);
-                int valueHour = Convert.ToInt32(elements[0]);
-                int valueMinute = Convert.ToInt32(elements[2]);
-
-                //string res = Convert.ToString(justTime);
-                //return res;
-            }*/
-
-            return result;
         }
         #endregion
     }
