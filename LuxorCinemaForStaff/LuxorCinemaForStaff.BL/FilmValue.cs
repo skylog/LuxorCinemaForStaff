@@ -3,12 +3,11 @@ namespace LuxorCinemaForStaff.BL
 {
     public class FilmValue : IValue
     {
-        delegate TimeSpan Trimer(string duration_string);
+        //delegate TimeSpan Trimer(string duration_string);
         #region Конструкторы
         public FilmValue(string input)
         {
-            Trimer t = Trim;
-            t(input);
+            Trim(input);
         }
         public FilmValue(string name, TimeSpan duration)
         {
@@ -18,10 +17,10 @@ namespace LuxorCinemaForStaff.BL
 
         public FilmValue()
         {
-            Trimer t = Trim;
+            
 
             Name = "Название фильма";
-            Duration = t("0 ч. 00 мин.");
+            Duration = Trim("0 ч. 00 мин.");
 
         }
         #endregion

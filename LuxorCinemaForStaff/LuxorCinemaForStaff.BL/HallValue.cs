@@ -7,8 +7,7 @@ namespace LuxorCinemaForStaff.BL
         #region Конструкторы
         public HallValue(string input)
         {
-            Trimer t = Trim;
-            t(input);
+            Trim(input);
         }
         public HallValue(string name, TimeSpan start)
         {

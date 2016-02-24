@@ -4,19 +4,15 @@ namespace LuxorCinemaForStaff.BL
 {
     public class Session : ISession
     {
-        delegate TimeSpan TimeCalc(TimeSpan start, TimeSpan duration);
-        public HallValue HV { get; set; }
-        public FilmValue FV { get; set; }
+        //delegate TimeSpan TimeCalc(TimeSpan start, TimeSpan duration);
         #region Конструкторы
         public Session(string start, string duration)
         {
-            HallValue HV = new HallValue(start);
-            FilmValue FV = new FilmValue(duration);
+
         }
         public Session(TimeSpan start, TimeSpan duration)
         {
-            TimeCalc t = Calc;
-            t(start, duration);
+            Calc(start, duration);
         }
 
         public Session()
