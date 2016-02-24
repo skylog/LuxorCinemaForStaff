@@ -3,24 +3,21 @@ namespace LuxorCinemaForStaff.BL
 {
     public class HallValue : IValue
     {
-        delegate TimeSpan Trimer(string duration_string);
+        //delegate TimeSpan Trimer(string duration_string);
         #region Конструкторы
-        public HallValue(string input)
-        {
-            Trim(input);
-        }
-        public HallValue(string name, TimeSpan start)
-        {
-            Name = name;
-            //Start = start;
-        }
-
         public HallValue()
         {
             Name = "Зал №";
-            //Start = "00:00";
+            Start = new TimeSpan(0, 0, 0);
+        }
+
+        public HallValue(string name, string startSession)
+        {
+            Name = name;
+            Start = Trim(startSession);
         }
         #endregion
+
         #region Поля
         private string _name;
         public string Name
@@ -39,6 +36,7 @@ namespace LuxorCinemaForStaff.BL
             set { _start = value; }
         }
         #endregion
+
         #region Методы
         private TimeSpan Trim(string start_string)
         {

@@ -7,7 +7,19 @@ namespace ConsoleApplication
     {
         
         static void Main(string[] args)
-        {/*
+        {
+            HallValue[] hallArray = new HallValue[3]
+           {
+            new HallValue("Зал 1", "12:05"),
+            new HallValue("Зал 2", "10:10"),
+            new HallValue("Зал 3", "15:30"),
+           };
+
+            Session sesList = new Session(hallArray);
+            foreach (HallValue h in sesList) Console.WriteLine("{0} {1}", h.Name, h.Start);
+
+
+            /*
             FilmValue Film = new FilmValue()
             {
                 Duration = TimeSpan.Parse("1 ч. 40 мин.") 

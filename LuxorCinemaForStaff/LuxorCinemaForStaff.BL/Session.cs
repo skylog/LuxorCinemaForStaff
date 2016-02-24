@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections;
 
 namespace LuxorCinemaForStaff.BL
 {
-    public class Session : ISession
+    public class Session : IEnumerable
     {
         //delegate TimeSpan TimeCalc(TimeSpan start, TimeSpan duration);
         #region Конструкторы
@@ -47,6 +48,87 @@ namespace LuxorCinemaForStaff.BL
         private TimeSpan Calc(TimeSpan start, TimeSpan duration)
         {
             return SessionEnd = start + duration;
+        }
+
+        /// <summary>
+        /// Реализация IEnumerable
+        /// </summary>
+        public HallValue[] _hall;
+        public Session(HallValue[] hArray)
+        {
+            _hall = new HallValue[hArray.Length];
+            for (int i = 0; i < hArray.Length; i++)
+            {
+                _hall[i] = hArray[i];
+            }
+        }
+
+        public FilmValue[] _film;
+        public Session(FilmValue[] fArray)
+        {
+            _film = new FilmValue[fArray.Length];
+            for (int j = 0; j< fArray.Length; j++)
+            {
+                _film[j] = fArray[j];
+            }
+        }
+
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public SessionEnum GetEnumerator()
+        {
+            return new SessionEnum(_hall);
+        }
+
+
+    }
+
+    public class SessionEnum : IEnumerator
+    {
+        public HallValue[] _hall;
+        int position = -1;
+
+        public SessionEnum(HallValue[] list)
+        {
+            _hall = list;
+        }
+
+        public bool MoveNext()
+        {
+            position++;
+            return (position < _hall.Length);
+        }
+
+        public void Reset()
+        {
+            position = -1;
+        }
+
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
+
+        public HallValue Current
+        {
+            get
+            {
+                try
+                {
+                    return _hall[position];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    throw new InvalidOperationException();
+                }
+            }
         }
     }
 }

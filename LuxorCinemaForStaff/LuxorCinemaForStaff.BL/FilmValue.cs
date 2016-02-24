@@ -5,23 +5,16 @@ namespace LuxorCinemaForStaff.BL
     {
         //delegate TimeSpan Trimer(string duration_string);
         #region Конструкторы
-        public FilmValue(string input)
-        {
-            Trim(input);
-        }
-        public FilmValue(string name, TimeSpan duration)
-        {
-            Name = name;
-            Duration = duration;
-        }
-
         public FilmValue()
         {
-            
-
             Name = "Название фильма";
-            Duration = Trim("0 ч. 00 мин.");
+            Duration = new TimeSpan(0, 0, 0);
+        }
 
+        public FilmValue(string name, string inputDuration)
+        {
+            Name = name;
+            Duration = Trim(inputDuration);
         }
         #endregion
 
