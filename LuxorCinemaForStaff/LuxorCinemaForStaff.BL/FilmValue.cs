@@ -46,7 +46,7 @@ namespace LuxorCinemaForStaff.BL
         }
         #endregion
 
-
+        #region IEnumerable
         public HallValue[] _hall;
         public FilmValue(HallValue[] hArray)
         {
@@ -67,6 +67,7 @@ namespace LuxorCinemaForStaff.BL
         {
             return new FilmEnum(_hall);
         }
+        #endregion
     }
 
     public class FilmEnum : IEnumerator

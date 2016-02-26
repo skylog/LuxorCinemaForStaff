@@ -50,9 +50,7 @@ namespace LuxorCinemaForStaff.BL
             return SessionEnd = start + duration;
         }
 
-        /// <summary>
-        /// Реализация IEnumerable
-        /// </summary>
+        #region IEnumerable
         public FilmValue[] _film;
         public Session(FilmValue[] fArray)
         {
@@ -73,7 +71,7 @@ namespace LuxorCinemaForStaff.BL
         {
             return new SessionEnum(_film);
         }
-
+        #endregion
 
     }
 
