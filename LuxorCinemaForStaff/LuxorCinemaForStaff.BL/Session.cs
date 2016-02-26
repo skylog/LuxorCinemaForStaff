@@ -81,16 +81,11 @@ namespace LuxorCinemaForStaff.BL
     {
         public FilmValue[] _film;
         int position = -1;
-        private HallValue[] _hall;
+
 
         public SessionEnum(FilmValue[] list)
         {
             _film = list;
-        }
-
-        public SessionEnum(HallValue[] _hall)
-        {
-            this._hall = _hall;
         }
 
         public bool MoveNext()
