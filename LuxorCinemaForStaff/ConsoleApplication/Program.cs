@@ -8,16 +8,35 @@ namespace ConsoleApplication
         
         static void Main(string[] args)
         {
-            HallValue[] hallArray = new HallValue[3]
+            FilmValue[] filmArray = new FilmValue[]
            {
-            new HallValue("Зал 1", "12:05"),
-            new HallValue("Зал 2", "10:10"),
-            new HallValue("Зал 3", "15:30"),
+                new FilmValue("Форсаж", "1ч. 45мин.")
+                //new FilmValue("Фильм 2", "2ч. 15мин."),
+                //new FilmValue("Фильм 3", "2ч. 5мин."),
            };
 
-            Session sesList = new Session(hallArray);
-            foreach (HallValue h in sesList) Console.WriteLine("{0} {1}", h.Name, h.Start);
+            HallValue[] hallArray = new HallValue[]
+            {
+                new HallValue("Зал 1","13:30"),
+                new HallValue("Зал 1","15:45"),
+                new HallValue("Зал 1","18:10"),
+            };
+            
 
+            Session sesList = new Session(filmArray);
+
+            FilmValue fList = new FilmValue(hallArray);
+
+            foreach (FilmValue f in sesList)
+            {
+                foreach (HallValue h in fList)
+                {
+                    Console.WriteLine("{0} {1} {2} {3}", f.Name, f.Duration, h.Name, h.Start);
+                }
+                
+            }
+
+            
 
             /*
             FilmValue Film = new FilmValue()

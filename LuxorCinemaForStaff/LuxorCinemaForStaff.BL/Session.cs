@@ -53,23 +53,13 @@ namespace LuxorCinemaForStaff.BL
         /// <summary>
         /// Реализация IEnumerable
         /// </summary>
-        public HallValue[] _hall;
-        public Session(HallValue[] hArray)
-        {
-            _hall = new HallValue[hArray.Length];
-            for (int i = 0; i < hArray.Length; i++)
-            {
-                _hall[i] = hArray[i];
-            }
-        }
-
         public FilmValue[] _film;
         public Session(FilmValue[] fArray)
         {
             _film = new FilmValue[fArray.Length];
-            for (int j = 0; j< fArray.Length; j++)
+            for (int i = 0; i < fArray.Length; i++)
             {
-                _film[j] = fArray[j];
+                _film[i] = fArray[i];
             }
         }
 
@@ -81,7 +71,7 @@ namespace LuxorCinemaForStaff.BL
 
         public SessionEnum GetEnumerator()
         {
-            return new SessionEnum(_hall);
+            return new SessionEnum(_film);
         }
 
 
@@ -89,18 +79,24 @@ namespace LuxorCinemaForStaff.BL
 
     public class SessionEnum : IEnumerator
     {
-        public HallValue[] _hall;
+        public FilmValue[] _film;
         int position = -1;
+        private HallValue[] _hall;
 
-        public SessionEnum(HallValue[] list)
+        public SessionEnum(FilmValue[] list)
         {
-            _hall = list;
+            _film = list;
+        }
+
+        public SessionEnum(HallValue[] _hall)
+        {
+            this._hall = _hall;
         }
 
         public bool MoveNext()
         {
             position++;
-            return (position < _hall.Length);
+            return (position < _film.Length);
         }
 
         public void Reset()
@@ -116,13 +112,13 @@ namespace LuxorCinemaForStaff.BL
             }
         }
 
-        public HallValue Current
+        public FilmValue Current
         {
             get
             {
                 try
                 {
-                    return _hall[position];
+                    return _film[position];
                 }
                 catch (IndexOutOfRangeException)
                 {
