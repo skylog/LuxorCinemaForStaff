@@ -40,7 +40,8 @@ namespace LuxorCinemaForStaff.BL
         #region Методы
         private TimeSpan Trim(string start_string)
         {
-            return Start = TimeSpan.Parse(start_string.Replace("ч.", ":").Replace("мин.", "").Replace(" ", ""));
+            //return Start = TimeSpan.Parse(start_string.Replace("ч.", ":").Replace("мин.", "").Replace(" ", ""));
+            return Start = TimeSpan.ParseExact(start_string, @"h' ч. 'm' мин.'", null);
         }
         #endregion
     }

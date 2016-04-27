@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuxorCinemaForStaff", "LuxorCinemaForStaff.csproj", "{386961EB-6131-4DEB-9F0F-1257F1286DA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuxorCinemaForStaff.Work", "LuxorCinemaForStaff.Work.csproj", "{386961EB-6131-4DEB-9F0F-1257F1286DA3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "ConsoleApplication\ConsoleApplication.csproj", "{86841A7C-6599-4E0B-AF3B-BBDF57EC1D5B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuxorCinemaForStaff.BL", "LuxorCinemaForStaff.BL\LuxorCinemaForStaff.BL.csproj", "{4A241FEB-281B-48AE-B3E7-61B09E718FE6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8F041765-2106-4FBD-9729-E707D3525226}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuxorCinemaForStaff.UI", "..\LuxorCinemaForStaff.UI\LuxorCinemaForStaff.UI.csproj", "{DDA380DD-9426-4529-ABE9-2BB564BA7C77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{4A241FEB-281B-48AE-B3E7-61B09E718FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A241FEB-281B-48AE-B3E7-61B09E718FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A241FEB-281B-48AE-B3E7-61B09E718FE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDA380DD-9426-4529-ABE9-2BB564BA7C77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA380DD-9426-4529-ABE9-2BB564BA7C77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA380DD-9426-4529-ABE9-2BB564BA7C77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA380DD-9426-4529-ABE9-2BB564BA7C77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

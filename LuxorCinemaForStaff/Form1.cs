@@ -179,9 +179,7 @@ namespace LuxorCinemaForStaff
             //myEncode.EncodeHtmlAsync();
         }
 
-    
 
-       
     }
 }
 

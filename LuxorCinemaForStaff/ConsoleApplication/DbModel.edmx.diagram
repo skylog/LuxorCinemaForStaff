@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0bb2370626324cbab12ceb2475d1bbb4" Name="Diagram1">
+        <EntityTypeShape EntityType="luxorfilmModel.Film" Width="1.5" PointX="4.625" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="luxorfilmModel.Hall" Width="1.5" PointX="4.375" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="luxorfilmModel.Session" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="luxorfilmModel.FK_Film_Session" ManuallyRouted="false" />
+        <AssociationConnector Association="luxorfilmModel.FK_Hall_Session" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

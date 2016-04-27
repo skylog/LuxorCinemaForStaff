@@ -7,6 +7,12 @@ namespace LuxorCinemaForStaff.BL
     {
         //delegate TimeSpan TimeCalc(TimeSpan start, TimeSpan duration);
         #region Конструкторы
+        public Session[] _session;
+        public Session(FilmValue[] fArray, HallValue[] hArray)
+        {
+
+        }
+
         public Session(string start, string duration)
         {
 
